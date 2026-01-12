@@ -4,6 +4,7 @@
 # Executables
 a.out
 libft.a
+.exe
 
 # Temporary files
 *~
