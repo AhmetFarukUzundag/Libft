@@ -1,45 +1,31 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auzundag <auzundag@student.42istanbul.com.tr  + +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/13 11:19:21 by auzundag          #+#    #+#             */
+/*   Updated: 2026/01/29 11:04:39 by auzundag         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_strrchr(const char *s, int c)
+#include "libft.h"
+
+char	*ft_strrchr(const char *s, int c)
 {
-    char *last = NULL;
-    int i = 0;
+	char	*last;
+	int		i;
 
-    while (s[i])
-    {
-        if (s[i] == (char)c)
-            last = (char *)&s[i];
-        i++;
-    }
-
-    if ((char)c == '\0')
-        return (char *)&s[i];
-
-    return last;
+	last = NULL;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			last = (char *)&s[i];
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)&s[i]);
+	return (last);
 }
-
-int main()
-{
-
-    char arr[] = "Hello";
-    char *p = ft_strrchr(arr, 101);
-    printf("%d", (char)*p);
-}
-
-// char *ft_strrchr(const char *s, int c)
-// {
-//     char *last = NULL;
-
-//     while (*s)
-//     {
-//         if (*s == (char)c)
-//             last = (char *)s;
-//         s++;
-//     }
-
-//     if ((char)c == '\0')
-//         return (char *)s;
-
-//     return last;
-// }

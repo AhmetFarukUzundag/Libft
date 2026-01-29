@@ -1,60 +1,31 @@
-NAME = libft.a
-FLAG = -Wall -Wextra -Werror 
+NAME= libft.a
 
-# SRC adında bir değişken tanımlıyor ve bu değişken kaynak dosyaları (.c dosyaları) tutacak.
-# Değer, bir shell komutu ile dinamik olarak belirleniyor:
-# $(shell ...) → Makefile içinde bir shell komutu çalıştırır ve çıktısını değişkene atar.
-# find . → mevcut dizinden başlayarak tüm dosyaları arar.
-# ! -name "ft_lst*.c" → ismi ft_lst ile başlayan (örneğin ft_lstnew.c, ft_lstadd_front.c vb.) tüm .c dosyalarını hariç tutar.
-# -name "ft_*.c" → ismi ft_ ile başlayıp .c ile biten dosyaları seçer.
-# SRC = $(shell find . ! -name "ft_lst*.c" -name "ft_*.c")
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
 
-# BONUS = $(shell find -name "ft_lst*.c")
+SRCS = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
+		ft_isprint.c ft_tolower.c ft_toupper.c \
+		ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_strlen.c \
+		ft_strlcpy.c ft_strlcat.c ft_strchr.c ft_memcmp.c ft_strrchr.c ft_strncmp.c \
+		ft_strnstr.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c \
+		ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
+		ft_putendl_fd.c ft_putnbr_fd.c \
+		ft_lstsize.c ft_lstlast.c ft_lstadd_front.c ft_lstnew.c \
+		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-# İlgili patterna uyan dosyaların listesini verir. Pattern: *.c, ft_*.c, src/*.c gibi
-SRC = $(wildcard ft_*.c)
-BONUS = $(wildcard ft_lst*.c)
+OBJS= $(SRCS:.c=.o)
 
-CC = gcc
-
-# SRC içindeki her dosya uzantısını .c yerine .o yap ve sonucu OBJ değişkenine ata.
-# Yani tüm kaynak dosyaların derlenmiş hali olan object dosyaları (.o dosyaları) listesi oluşur.
-OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(BONUS:.c=.o)
-
-# Kullanıcı sadece make komutunu yazarsa, all hedefini (targetini) çalıştır.
-# Makefile’da target, “make X” dediğinde çalışan şeydir.
 all: $(NAME)
 
-%.o: %.c
-	${CC} $(FLAG) -c $< -o $@
-
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
-
-bonus: $(OBJ) $(BONUS_OBJ)
-	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+$(NAME):$(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
-	rm -f $(BONUS_OBJ) $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME) 
-	
+	rm -f $(NAME)
+
 re: fclean all
 
-.PHONY: all bonus clean fclean re 
-
-# target: dependency1 dependency2 dependency3
-# 	komutlar
-# Make şunu yapar:
-
-# make bonus dedin
-
-# Make bakar:
-
-# $(OBJ) var mı? Yoksa üret
-
-# $(BONUS_OBJ) var mı? Yoksa üret
-
-# Hepsi hazır olunca:
+.PHONY: all clean fclean re

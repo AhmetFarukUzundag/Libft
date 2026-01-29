@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auzundag <auzundag@student.42istanbul.com.tr  + +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 11:17:42 by auzundag          #+#    #+#             */
-/*   Updated: 2026/01/13 11:17:45 by auzundag         ###   ########.fr       */
+/*   Created: 2026/01/28 10:51:30 by auzundag          #+#    #+#             */
+/*   Updated: 2026/01/28 19:30:39 by auzundag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int c)
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	else
-		return (c);
+	if (lst && del)
+	{
+		del(lst->content);
+		free(lst);
+	}
 }

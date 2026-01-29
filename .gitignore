@@ -16,3 +16,5 @@ libft.a
 
 # OS files
 .DS_Store
+
+test*

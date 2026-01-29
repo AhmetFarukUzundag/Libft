@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auzundag <auzundag@student.42istanbul.com.tr  + +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 16:46:20 by auzundag          #+#    #+#             */
-/*   Updated: 2026/01/29 11:03:52 by auzundag         ###   ########.fr       */
+/*   Created: 2026/01/15 13:03:23 by auzundag          #+#    #+#             */
+/*   Updated: 2026/01/29 11:04:45 by auzundag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
+	size_t	length_s;
+	char	*substr;
 
-	i = 0;
-	while (i < n)
+	if (!s)
+		return (NULL);
+	length_s = ft_strlen(s);
+	if (start >= length_s)
 	{
-		((unsigned char *)s)[i] = (unsigned char)c;
-		i++;
+		substr = malloc(1);
+		if (substr)
+			substr[0] = '\0';
+		return (substr);
 	}
-	return (s);
+	if (len > length_s - start)
+		len = length_s - start;
+	substr = malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	ft_memcpy(substr, s + start, len);
+	substr[len] = '\0';
+	return (substr);
 }
